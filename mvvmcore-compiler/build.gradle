@@ -1,0 +1,33 @@
+apply plugin: 'java-library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'mvvmcore-compiler'
+
+    publishedGroupId = 'com.gorgexec.mvvmcore'
+    libraryName = 'mvvmcore-compiler'
+    artifact = 'compiler'
+
+    libraryDescription = 'MvvmCore library compiler component'
+
+    siteUrl = 'https://github.com/gorgexec/MvvmCore'
+    gitUrl = 'https://github.com/gorgexec/MvvmCore.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'gorgexec'
+    developerName = 'George S'
+    developerEmail = 'gorgexec@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+dependencies {
+    implementation project(':mvvmcore-annotations')
+    implementation 'com.squareup:javapoet:1.11.1'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

@@ -1,0 +1,2 @@
+include ':app', ':mvvmcore-annotations', ':mvvmcore-compiler', ':mvvmcore', ':mvvmcore-rx'
+rootProject.name='MvvmCore'

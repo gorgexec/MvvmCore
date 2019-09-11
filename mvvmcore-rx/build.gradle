@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'mvvmcore-rx'
+
+    publishedGroupId = 'com.gorgexec.mvvmcore'
+    libraryName = 'mvvmcore-rx'
+    artifact = 'rx'
+
+    libraryDescription = 'MvvmCore library reactive java extension'
+
+    siteUrl = 'https://github.com/gorgexec/MvvmCore'
+    gitUrl = 'https://github.com/gorgexec/MvvmCore.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'gorgexec'
+    developerName = 'George S'
+    developerEmail = 'gorgexec@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation project(':mvvmcore')
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+}
