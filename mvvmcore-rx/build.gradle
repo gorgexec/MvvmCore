@@ -8,7 +8,7 @@ ext {
     libraryName = 'mvvmcore-rx'
     artifact = 'rx'
 
-    libraryDescription = 'MvvmCore library reactive java extension'
+    libraryDescription = 'MvvmCore library reactive java component'
 
     siteUrl = 'https://github.com/gorgexec/MvvmCore'
     gitUrl = 'https://github.com/gorgexec/MvvmCore.git'
@@ -57,3 +57,6 @@ dependencies {
     implementation project(':mvvmcore')
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
 }
+
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
