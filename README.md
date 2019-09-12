@@ -12,10 +12,12 @@ The library has some base classes that should be extended by developer:
 * for `Fragment`  - `FragmentCore`, `BindableFragmentCore`
 * for `ViewModel` - `ViewModelCore`
 
+'Bindable*' versions for databinding capabilities 
+
 In order to create an Activity with injected ViewModel and bound to the correspoding layout the code should be like the following:
 
 ```java
-@ViewModelOwner
+@ViewModelOwner //-->annotation provides ViewModel injection
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, Model> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
