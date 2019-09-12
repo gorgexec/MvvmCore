@@ -6,7 +6,7 @@ This library provides minimal infrastructure for android application building ba
 * [Navigation](https://developer.android.com/guide/navigation)
 
 ## How does it look in real life?
-The library has some base classes that should be extended by developer:
+The library has some base classes that should be extended:
 
 * for `Activity`  - `ActivityCore`, `BindableActivityCore`
 * for `Fragment`  - `FragmentCore`, `BindableFragmentCore`
