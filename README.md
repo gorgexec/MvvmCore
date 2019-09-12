@@ -14,7 +14,7 @@ The library has some base classes that should be extended by developer:
 
 In order to have Activity with injected model that bound to layout the code should be like the following:
 
-```
+```java
 @ViewModelOwner
 public class Activity extends BindableActivityCore<ActivityMainBinding, Model> {
 }
