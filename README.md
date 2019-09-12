@@ -3,7 +3,7 @@ This library provides minimal infrastructure for android application building ba
 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
   * dagger2 instantiation
-  * sharing
+  * sharing between views
   * lifecycle management
   * view notifications
  
