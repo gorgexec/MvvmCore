@@ -22,7 +22,7 @@ The library has some base classes that should be extended:
 In order to create an Activity with injected ViewModel and bound to the correspoding layout the code should be like the following:
 
 ```java
-@ViewModelOwner //-->key part for ViewModel injection ability and lifecycle management
+@ViewModelOwner //-->key part for ViewModel lifecycle management
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, Model> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
