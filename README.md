@@ -26,7 +26,6 @@ In order to create an Activity with injected ViewModel and bound to the correspo
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, Model> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
      bind(R.layout.activity_main, Model.class);
     }
 }
