@@ -6,7 +6,7 @@ This library provides minimal infrastructure for android application building ba
 * [Navigation](https://developer.android.com/guide/navigation)
 
 ## How does it look in real life?
-The library has some base classes for Activity (`ActivityCore`, `BindableActivityCore`), Fragment or ViewModel that should be extended by developer. 
+The library has some base classes for `Activity` (`ActivityCore`, `BindableActivityCore`), `Fragment` (`FragmentCore`, `BindableFragmentCore`) or `ViewModel` (`ViewModelCore`) that should be extended by developer. 
 
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
