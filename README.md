@@ -12,7 +12,7 @@ The library has some base classes that should be extended by developer:
 * for `Fragment`  - `FragmentCore`, `BindableFragmentCore`
 * for `ViewModel` - `ViewModelCore`
 
-In order to have Activity with injected model that bound to layout the code should be like the following:
+In order to get an Activity with injected ViewModel mapped to bound layout the code should be like the following
 
 ```java
 @ViewModelOwner
