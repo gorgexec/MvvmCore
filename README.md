@@ -6,7 +6,13 @@ This library provides minimal infrastructure for android application building ba
 * [Navigation](https://developer.android.com/guide/navigation)
 
 ## How does it look in real life?
-The library has some base classes for `Activity` (`ActivityCore`, `BindableActivityCore`), `Fragment` (`FragmentCore`, `BindableFragmentCore`) or `ViewModel` (`ViewModelCore`) that should be extended by developer. So, in order to have Activity with corresponding injected model bound to layout the code should be like the following:
+The library has some base classes that should be extended by developer:
+
+* for `Activity` - `ActivityCore`, `BindableActivityCore`
+* for `Fragment` - `FragmentCore`, `BindableFragmentCore`
+* for `ViewModel`- `ViewModelCore`
+
+In order to have Activity with injected model that bound to layout the code should be like the following:
 
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
