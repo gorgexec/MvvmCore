@@ -12,7 +12,7 @@ The library has some base classes that should be extended:
 * for `Fragment`  - `FragmentCore`, `BindableFragmentCore`
 * for `ViewModel` - `ViewModelCore`
 
-'Bindable*' versions for databinding capabilities 
+'Bindable*' - versions for databinding capabilities. 
 
 In order to create an Activity with injected ViewModel and bound to the correspoding layout the code should be like the following:
 
