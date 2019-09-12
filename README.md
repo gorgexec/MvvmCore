@@ -14,6 +14,13 @@ The library has some base classes that should be extended by developer:
 
 In order to have Activity with injected model that bound to layout the code should be like the following:
 
+```
+@ViewModelOwner
+public class Activity extends BindableActivityCore<ActivityMainBinding, Model> {
+}
+
+```
+
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
 The well known ViewModelFactory with Dagger2 Multibindings approach is used, but with this library you should't think of its implementation and maintenance (e.g. viewModels bindings modules etc.).
