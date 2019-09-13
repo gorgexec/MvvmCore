@@ -5,7 +5,7 @@ This library provides minimal infrastructure for android application building ba
   * dagger2 instantiation
   * sharing between views
   * lifecycle management
-  * view notifications
+  * model-to-view notifications
  
 * [Databinding](https://developer.android.com/topic/libraries/data-binding)
 * [Navigation](https://developer.android.com/guide/navigation)
@@ -19,7 +19,7 @@ The library has some base classes that should be extended:
 
 'Bindable*' - versions for databinding capabilities. 
 
-In order to create an Activity with injected ViewModel and bound to the correspoding layout the code should be like the following:
+In order to create an Activity with ViewModel injected and bound to the correspoding layout the code should be like the following:
 
 ```java
 @ViewModelOwner //-->key part for ViewModel lifecycle management
