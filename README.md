@@ -19,7 +19,7 @@ The library has some base classes that should be extended:
 
 'Bindable*' - versions for databinding capabilities. 
 
-In order to create an Activity with ViewModel injected and bound to the correspoding layout the code should be like the following:
+For example, in order to create an Activity with ViewModel injected and bound to the correspoding layout the code should be like the following:
 
 ```java
 @ViewModelOwner //-->key part for ViewModel lifecycle management
