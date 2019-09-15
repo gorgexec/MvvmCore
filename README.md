@@ -30,7 +30,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Mode
     }
 }
 ```
-That's it. And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules and other stuff concerning ViewModel creation and databinding. All under the hood! 
+That's it. And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
