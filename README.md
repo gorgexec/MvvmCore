@@ -10,7 +10,7 @@ This library provides minimal infrastructure for android application building ba
 * [Databinding](https://developer.android.com/topic/libraries/data-binding)
 * [Navigation](https://developer.android.com/guide/navigation)
 
-## How does it look in real life?
+## Usage
 The library has some base classes that should be extended:
 
 * for `Activity`  - `ActivityCore`, `BindableActivityCore`
