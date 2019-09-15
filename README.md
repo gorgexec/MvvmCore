@@ -19,7 +19,7 @@ The library has some base classes that should be extended:
 
 `Bindable *` - versions for databinding capabilities. 
 
-For example, in order to create an Activity with ViewModel injected and bound to the layout the code should be like the following:
+### Activity
 
 ```java
 @ViewModelOwner
@@ -30,7 +30,14 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Mode
     }
 }
 ```
+
+### Fragment
+
+
+### ViewModel
 That's it. And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
+
+For example, in order to create an Activity with ViewModel injected and bound to the layout the code should be like the following:
 
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
