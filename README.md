@@ -17,7 +17,7 @@ The library has some base classes that should be extended:
 * for `Fragment`  - `FragmentCore`, `BindableFragmentCore`
 * for `ViewModel` - `ViewModelCore`
 
-'Bindable*' - versions for databinding capabilities. 
+`Bindable *` - versions for databinding capabilities. 
 
 For example, in order to create an Activity with ViewModel injected and bound to the layout the code should be like the following:
 
