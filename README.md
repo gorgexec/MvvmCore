@@ -15,7 +15,7 @@ First of all, MvvmCore is about interaction between ViewModel and View. Let's se
 The library has some base classes that should be extended when implementing `Activity`, `Fragment` or `ViewModel`. Classes with `Bindable *` prefix are used for databinding capabilities.
 
 ### Activity
-There are MvvmCore base classes `ActivityCore` or `BindableActivityCore` that should be extended.
+Extend `ActivityCore` or `BindableActivityCore`.
 
 ```java
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
