@@ -18,7 +18,6 @@ The library has some base classes that should be extended when implementing `Act
 There are MvvmCore base classes `ActivityCore` or `BindableActivityCore` that should be extended.
 
 ```java
-@ViewModelOwner
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
