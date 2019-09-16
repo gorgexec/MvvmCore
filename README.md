@@ -40,6 +40,18 @@ With this code you'll get:
 * Initialized `NavController` accessible through `nav()`activity method.
 * Option to subscribe and respond to any view model-issued event with the help of `subscribeNotification()` method.
 
+Thus, in more complex case the code may be like that:
+
+```java
+public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
+ @Override
+    protected void onCreate(Bundle savedInstanceState) {
+     super.onCreate(savedInstanceState);
+     bind(R.layout.activity_main, R.id.navHostFragment, MainViewModel.class);
+    }
+}
+```
+
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
 
