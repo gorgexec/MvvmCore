@@ -31,11 +31,13 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 
 `bind()` method has some overloads for different needs. E.g. if navigation is not your case, `bind(R.layout.activity_main, MainViewModel.class)` can be used instead.
 
-That's it. With this code you'll get:
+That's it. 
 
-* ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model` property of the corresponding activity.
-* Layout elements accessible through `binding` property of the activity.
-* Initialized `NavController` accessible through `nav()` method of the activity.
+With this code you'll get:
+
+* ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model()` method of the corresponding activity.
+* Layout elements accessible through `binding()` activity method.
+* Initialized `NavController` accessible through `nav()`activity method.
 
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
