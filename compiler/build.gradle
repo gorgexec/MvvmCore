@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/gorgexec/MvvmCore'
     gitUrl = 'https://github.com/gorgexec/MvvmCore.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'gorgexec'
     developerName = 'George S'
@@ -25,7 +25,7 @@ ext {
 }
 
 dependencies {
-    implementation 'com.gorgexec.mvvmcore:annotations:1.0.0'
+    implementation 'com.gorgexec.mvvmcore:annotations:1.0.1'
     implementation 'com.squareup:javapoet:1.11.1'
 }
 

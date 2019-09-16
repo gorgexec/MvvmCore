@@ -1,8 +1,8 @@
 package com.gorgexec.mvvmcore.compiler;
 
 import com.gorgexec.mvvmcore.annotations.ActivityResultHandler;
-import com.gorgexec.mvvmcore.annotations.ViewModelOwner;
 import com.gorgexec.mvvmcore.annotations.NotificationHandler;
+import com.gorgexec.mvvmcore.annotations.ViewModelOwner;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -28,6 +28,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 
@@ -41,6 +42,9 @@ public class CoreBindingsProcessor extends AbstractProcessor {
 
     private static final String DEFAULT_PACKAGE_NAME = "com.gorgexec.mvvmcore";
     private static final String CLASSNAME = "CoreBindingsModule";
+
+    private static final String ACTIVITY_CORE_CLASSNAME = "ActivityCore";
+    private static final String FRAGMENT_CORE_CLASSNAME = "FragmentCore";
 
     private static final String MODULE_PACKAGE_OPTION_KEY = "android.databinding.modulePackage";
     private static final String INOTIFICATION_HANDLER = "com.gorgexec.mvvmcore.notification.INotificationHandler";
@@ -76,12 +80,11 @@ public class CoreBindingsProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
 
         //fill view models list
-        for (Element element : roundEnvironment.getElementsAnnotatedWith(ViewModelOwner.class)) {
-            if (element.getKind() == ElementKind.CLASS) {
+        for (Element element : roundEnvironment.getRootElements()) {
+            if(isViewModelOwner(element)){
                 TypeElement typeElement = (TypeElement) element;
                 TypeMirror typeMirror = typeElement.getSuperclass();
                 DeclaredType declaredType = (DeclaredType) typeMirror;
-
                 if (declaredType.getTypeArguments().size() > 1) {
                     models.add(declaredType.getTypeArguments().get(1));
                 }
@@ -192,6 +195,28 @@ public class CoreBindingsProcessor extends AbstractProcessor {
         }
 
         return res;
+    }
+
+    private static boolean isSubTypeOf(Element element, String superTypeSimpleName){
+        boolean res = false;
+        TypeElement typeElement = (TypeElement) element;
+        if(typeElement.getSimpleName().toString().equals(superTypeSimpleName)){
+            res = true;
+        }
+        else {
+            TypeMirror typeMirror = typeElement.getSuperclass();
+            if(typeMirror != null && typeMirror.getKind() != TypeKind.NONE && typeMirror.getKind() != TypeKind.NULL) {
+                DeclaredType declaredType = (DeclaredType) typeMirror;
+                res = isSubTypeOf(declaredType.asElement(), superTypeSimpleName);
+            }
+        }
+
+        return res;
+    }
+
+    private static boolean isViewModelOwner(Element element){
+        return (isSubTypeOf(element, FRAGMENT_CORE_CLASSNAME) && element.getAnnotation(ViewModelOwner.class) != null)
+                || isSubTypeOf(element, ACTIVITY_CORE_CLASSNAME);
     }
 
 }
