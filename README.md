@@ -11,7 +11,7 @@ This library provides minimal infrastructure for android application building ba
 * [Navigation](https://developer.android.com/guide/navigation)
 
 ## Usage
-First of all, MvvmCore is about interaction between ViewModel and View. Let's see, how it is simplified by the library in case of using Activity/Fragment and ViewModel from Android application architecture components.
+First of all, MvvmCore is about interaction between ViewModel and View. Let's see, how it is simplified by the library in case of using Activity/Fragment and ViewModel.
 The library has some base classes that should be extended when implementing `Activity`, `Fragment` or `ViewModel`. Classes with `Bindable *` prefix are used for databinding capabilities.
 
 ### Activity
