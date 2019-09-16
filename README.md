@@ -19,10 +19,11 @@ There are MvvmCore base classes `ActivityCore` or `BindableActivityCore` that sh
 
 ```java
 @ViewModelOwner
-public class MainActivity extends BindableActivityCore<ActivityMainBinding, Model> {
+public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
-     bind(R.layout.activity_main, Model.class);
+     super.onCreate(savedInstanceState);
+     bind(R.layout.activity_main, MainViewModel.class);
     }
 }
 ```
