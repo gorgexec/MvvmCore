@@ -23,7 +23,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
  @Override
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
-     bind(R.layout.activity_main,  R.id.navHostFragment, MainViewModel.class);
+     bind(R.layout.activity_main, R.id.navHostFragment, MainViewModel.class);
     }
 }
 ```
