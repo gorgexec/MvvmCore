@@ -33,8 +33,9 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 
 That's it. With this code you'll get:
 
-*  ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model` property of the corresponding activity.
-* 
+* ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model` property of the corresponding activity.
+* Layout elements accessible through `binding` property of the activity.
+* Initialized `NavController' through `nav()` method of the activity.
 
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
