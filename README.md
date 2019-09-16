@@ -38,7 +38,7 @@ With this code you'll get:
 * ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model()` method of the corresponding activity.
 * Layout elements accessible through `binding()` activity method.
 * Initialized `NavController` accessible through `nav()`activity method.
-* Option to subscribe and respond to any view model-issued event with the help of `subscribeNotification()` method. In some cases it's necessary to inform activity about some event has occured in view model. E.g. as the `ViewModel` doesn't have direct `Context` reference, one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing somekind of `LiveData` view model property, that is subscribed by `Activity`. But sometimes that becomes boring when multiple cases in several views take place. 
+* Option to subscribe and respond to any view model-issued event with the help of `subscribeNotification()` method.
 
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
@@ -52,3 +52,5 @@ For example, in order to create an Activity with ViewModel injected and bound to
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
 The well known ViewModelFactory with Dagger2 Multibindings approach is used, but with this library you should't think of its implementation and maintenance (e.g. viewModels bindings modules etc.).
+
+* In some cases it's necessary to inform activity about some event has occured in view model. E.g. as the `ViewModel` doesn't have direct `Context` reference, one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing somekind of `LiveData` view model property, that is subscribed by `Activity`. But sometimes that becomes boring when multiple cases in several views take place. 
