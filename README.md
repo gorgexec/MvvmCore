@@ -38,6 +38,7 @@ With this code you'll get:
 * ViewModel instance created with necessary dependencies, injected to the activity and accessible through `model()` method of the corresponding activity.
 * Layout elements accessible through `binding()` activity method.
 * Initialized `NavController` accessible through `nav()`activity method.
+* Option to subscribe and respond to any custom view model event with the help of `subscribeNotification()` method.
 
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
