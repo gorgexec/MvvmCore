@@ -29,7 +29,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 }
 ```
 
-`bind()` method has some overloads for different needs. E.g. if navigation is not used in your case, `bind(R.layout.activity_main, MainViewModel.class)` can be used.
+`bind()` method has some overloads for different needs. E.g. if navigation is not your case, `bind(R.layout.activity_main, MainViewModel.class)` can be used instead.
 
 That's it. With this code you'll get:
 
