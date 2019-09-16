@@ -26,6 +26,10 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
     }
 }
 ```
+That's it. With this code you get:
+
+*  ViewModel instance created with with necessary dependencies and injected to the activity. ViewModel object is accessible through `model` property of the corresponding activity.
+* 
 
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
