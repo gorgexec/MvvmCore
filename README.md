@@ -11,7 +11,7 @@ This library provides minimal infrastructure for android application building ba
 * [Navigation](https://developer.android.com/guide/navigation)
 
 ## Usage
-First of all, MvvmCore is about interaction between ViewModel and View. So, lets see, how it is simplified by the library in case of using Activity/Fragment and ViewModel from Android application architecture components.
+First of all, MvvmCore is about interaction between ViewModel and View. Let's see, how it is simplified by the library in case of using Activity/Fragment and ViewModel from Android application architecture components.
 The library has some base classes that should be extended when implementing `Activity`, `Fragment` or `ViewModel`. Classes with `Bindable *` prefix are used for databinding capabilities.
 
 ### Activity
@@ -32,7 +32,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
 
 ### ViewModel
-To implenent ViewModel `ViewModelCore`
+When implementing ViewModel `ViewModelCore` base class should be extended.
 That's it. And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
 For example, in order to create an Activity with ViewModel injected and bound to the layout the code should be like the following:
