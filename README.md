@@ -33,7 +33,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 
 That's it. With this code you'll get:
 
-*  ViewModel instance created with with necessary dependencies and injected to the activity. ViewModel object is accessible through `model` property of the corresponding activity.
+*  ViewModel instance created with necessary dependencies and injected to the activity. ViewModel object is accessible through `model` property of the corresponding activity.
 * 
 
 ### Fragment
