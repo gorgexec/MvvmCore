@@ -45,9 +45,9 @@ There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that sho
 
 ### ViewModel
 When implementing ViewModel `ViewModelCore` base class should be extended.
-That's it. And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
-For example, in order to create an Activity with ViewModel injected and bound to the layout the code should be like the following:
+
+And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
 ## Features
 * ViewModel automated instantiation through Dagger2 out of the box.
