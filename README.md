@@ -87,7 +87,7 @@ public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewMo
 ```
 3. If ViewModel lifecycle is controlled by Fragment, it's always required to use `@ViewModelOwner` annotation. Otherwise, if ViewModel owner is Activity that should share own ViewModel with the Fragment - skip the annotaion.
 
-4. All library methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback. `binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
+4. All MvvmCore methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback. `binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
 
 ### ViewModel
 When implementing ViewModel `ViewModelCore` base class should be extended.
