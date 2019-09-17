@@ -65,7 +65,8 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 ```
 
 ### Fragment
-There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
+The library provides the same abilities for Fragments as for Activities. But the are slightly differences in preparation.
+There are base classes  `FragmentCore` or `BindableFragmentCore` that should be extended.
 
 ```java
 @ViewModelOwner
