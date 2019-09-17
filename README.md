@@ -52,7 +52,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
      //initializing recycler view adapter
      binding().recyclerView.setAdapter(new Adapter());
     
-     //filling model with data from intent
+     //filling up view model with data from intent
      String someId = getIntent().getStringExtra("someId");
      model().setId(someId);
      
