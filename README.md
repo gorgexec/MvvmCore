@@ -40,7 +40,7 @@ With this code you'll get:
 * Initialized `NavController` accessible through `nav()`activity method.
 * Option to subscribe and respond to any view model-issued event with the help of `subscribeNotification()` method.
 
-Thus, in more complex case the code may be like that:
+Thus, in more complex case the code may be something like that:
 
 ```java
 public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
@@ -48,6 +48,15 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
      bind(R.layout.activity_main, R.id.navHostFragment, MainViewModel.class);
+     .....
+     binding().recyclerView.setAdapter(new Adapter());
+     .....
+     String someId = getIntent().getStringExtra("someId");
+     model().setId(someId);
+     .....
+     subscribeNotification(Model.ShowSomething.class, notification -> nav().navigate(R.id.somethingFragment));
+     subscribeNotification(Finish.class, notification -> finish());
+     .....
     }
 }
 ```
