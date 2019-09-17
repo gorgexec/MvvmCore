@@ -67,6 +67,21 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 ### Fragment
 There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that should be extended.
 
+```java
+@ViewModelOwner
+public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewModel> {
+
+    public MyFragment() {
+        super(R.layout.fragment_my, R.id.orderFragment, MyViewModel.class);
+    }
+
+    @Override
+    protected void onBindingReady() {
+        ...
+    }
+}
+```
+
 ### ViewModel
 When implementing ViewModel `ViewModelCore` base class should be extended.
 
