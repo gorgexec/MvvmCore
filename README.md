@@ -102,6 +102,26 @@ public class MyViewModel extends ViewModelCore {
 ```
 ViewModel construtor may be empty or include any number of necessary dependencies, except Context or any View-specific objects references, because of architecture principles violation. 
 
+As ViewModel extended from `ViewModelCore` becomes to be a subtype of `androidx.lifecycle.ViewModel`, it supports all `androidx.lifecycle.ViewModel` features. Also it already implements `androidx.databinding.Observable`, so it is ready to use binding fields like:
+
+```java
+...
+private String login;
+
+@Bindable
+public String getLogin() {
+    return login;
+}
+
+public void setLogin(String login) {
+    if (!login.equals(this.login)) {
+        this.login = login;
+        notifyPropertyChanged(BR.login);
+    }
+}
+...
+```
+
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
 ## Features
