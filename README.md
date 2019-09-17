@@ -72,7 +72,7 @@ There are MvvmCore base classes  `FragmentCore`, `BindableFragmentCore` that sho
 public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewModel> {
 
     public MyFragment() {
-        super(R.layout.fragment_my, R.id.orderFragment, MyViewModel.class);
+        super(R.layout.fragment_my, R.id.myFragment, MyViewModel.class);
     }
 
     @Override
