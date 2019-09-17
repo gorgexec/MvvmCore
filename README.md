@@ -48,12 +48,15 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
      bind(R.layout.activity_main, R.id.navHostFragment, MainViewModel.class);
-     .....
+     
+     //initializing recycler view adapter
      binding().recyclerView.setAdapter(new Adapter());
-     .....
+    
+     //filling model with data from intent
      String someId = getIntent().getStringExtra("someId");
      model().setId(someId);
-     .....
+     
+     //subscribing to some events issued by view model
      subscribeNotification(Model.ShowSomething.class, notification -> nav().navigate(R.id.somethingFragment));
      subscribeNotification(Finish.class, notification -> finish());
      .....
