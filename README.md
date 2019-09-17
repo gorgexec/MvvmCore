@@ -100,7 +100,7 @@ public class MyViewModel extends ViewModelCore {
     }
 }
 ```
-ViewModel construtor may be empty or include any number of necessary dependencies, except Context references. because of architecture principles violation. 
+ViewModel construtor may be empty or include any number of necessary dependencies, except any Context or View-speific classes references, because of architecture principles violation. 
 
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
