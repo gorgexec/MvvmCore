@@ -57,7 +57,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
      model().setId(someId);
      
      //subscribing to some events issued by view model
-     subscribeNotification(Model.ShowSomething.class, notification -> nav().navigate(R.id.somethingFragment));
+     subscribeNotification(MainViewModel.MainViewModel.class, notification -> nav().navigate(R.id.somethingFragment));
      subscribeNotification(Finish.class, notification -> finish());
      .....
     }
@@ -150,11 +150,25 @@ MvvmCore provides additional way to broadcast notifications outside `ViewModel` 
 
 For example, as `ViewModel` doesn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring. 
 
+So, it can be done out of the box with the help of MvvmCore ViewModel `notifyView()` method, that accepts parameter of any type as notification content:
+```java
+public class MyViewModel extends ViewModelCore {
+   .....
+   private void onDataFetched(Data data) {
+      notifyView(new ShowDataFragment(data));
+   }
+   ....
+   public static class ShowDataFragment {
+      .....
+      public ShowDataFragment(Data data) {
+         this.data = data;
+      }
+   }
 
-And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
+}
 
-## Features
-* ViewModel automated instantiation through Dagger2 out of the box.
-The well known ViewModelFactory with Dagger2 Multibindings approach is used, but with this library you should't think of its implementation and maintenance (e.g. viewModels bindings modules etc.).
 
-* In some cases it's necessary to inform activity about some event has occured in view model. E.g. as the `ViewModel` doesn't have direct `Context` reference, one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing somekind of `LiveData` view model property, that is subscribed by `Activity`. But sometimes that becomes boring when multiple cases in several views take place. 
+
+
+MainViewModel
+```
