@@ -104,7 +104,7 @@ It may be empty constructor or constructor declaring any number of necessary dep
 
 #### Data binding properties
 
-As extended from `ViewModelCore`, ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`. It supports all `androidx.lifecycle.ViewModel` features and also implements `androidx.databinding.Observable` out of the box, so it is ready to provide Data binding properties to its view:
+As extended from `ViewModelCore`, ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`. It supports all `androidx.lifecycle.ViewModel` features and also implements `androidx.databinding.Observable` out of the box, so it is ready to provide Data binding properties to its View like the following:
 
 ```java
 public class MyViewModel extends ViewModelCore {
