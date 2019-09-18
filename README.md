@@ -125,6 +125,23 @@ public class MyViewModel extends ViewModelCore {
    ...
 }
 ```
+and corresponding layout (some usual xml code is omitted for brevity):
+
+```xml
+<layout>
+    <data>
+        <variable
+            name="model"
+            type="com.example.view.MyViewModel" />
+    </data>
+ ...
+  <EditText
+      android:id="@+id/login"
+      android:text="@={model.login}" />
+ ...
+ 
+</layout
+```    
 
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
