@@ -104,24 +104,26 @@ It may be empty constructor or constructor declaring any number of necessary dep
 
 #### Data binding properties
 
-As extended from `ViewModelCore` ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`, it supports all `androidx.lifecycle.ViewModel` features. It also implements `androidx.databinding.Observable` out of the box, so it is ready to use Data binding enabled properties like the following:
+As extended from `ViewModelCore`, ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`. It supports all `androidx.lifecycle.ViewModel` features and also implements `androidx.databinding.Observable` out of the box, so it is ready to provide Data binding properties to its view:
 
 ```java
+public class MyViewModel extends ViewModelCore {
 ...
-private String login;
+   private String login;
 
-@Bindable
-public String getLogin() {
-    return login;
-}
+   @Bindable
+   public String getLogin() {
+       return login;
+   }
 
-public void setLogin(String login) {
-    if (!login.equals(this.login)) {
-        this.login = login;
-        notifyPropertyChanged(BR.login);
-    }
-}
+   public void setLogin(String login) {
+       if (!login.equals(this.login)) {
+           this.login = login;
+           notifyPropertyChanged(BR.login);
+       }
+   }
 ...
+}
 ```
 
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
