@@ -64,6 +64,9 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 }
 ```
 
+#### Activity result handlers
+TBD
+
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But the are slightly differences in preparation.
 
@@ -145,7 +148,6 @@ and corresponding layout (some usual xml code is omitted for brevity):
 #### ViewModel notifications
 MvvmCore provides additional way to broadcast notifications outside `ViewModel` and handle them either by `Activity` or by special `NotificationHandler` (global notifications).
 
-#### Activity result handlers
 
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
