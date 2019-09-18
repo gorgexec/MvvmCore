@@ -90,7 +90,7 @@ public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewMo
 4. All MvvmCore methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback. `binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
 
 ### ViewModel
-When implementing ViewModel `ViewModelCore` base class should be extended. MvvmCore uses Dagger2 to provide ViewModels instances, thus implementing ViewModel constructor should be annotated with `@Inject`:
+When implementing ViewModel, `ViewModelCore` base class should be extended. MvvmCore uses Dagger2 to provide ViewModels instances, thus ViewModel constructor should be annotated with `@Inject`:
 
 ```java
 public class MyViewModel extends ViewModelCore {
@@ -100,9 +100,11 @@ public class MyViewModel extends ViewModelCore {
     }
 }
 ```
-ViewModel constructor may be empty or include any number of necessary dependencies, except Context or any View-specific objects references, because of architecture principles violation. 
+It may be empty constructor or constructor declaring any number of necessary dependencies, except Context or any View-specific objects references, because of architecture principles violation. 
 
-As ViewModel extended from `ViewModelCore` becomes to be a subtype of `androidx.lifecycle.ViewModel`, it supports all `androidx.lifecycle.ViewModel` features. Also it already implements `androidx.databinding.Observable`, so it is ready to use Data binding enabled properties like the following:
+#### Data binding properties
+
+As extended from `ViewModelCore` ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`, it supports all `androidx.lifecycle.ViewModel` features. It also implements `androidx.databinding.Observable` out of the box, so it is ready to use Data binding enabled properties like the following:
 
 ```java
 ...
