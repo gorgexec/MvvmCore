@@ -108,7 +108,7 @@ As extended from `ViewModelCore`, ViewModel becomes to be a subtype of `androidx
 
 ```java
 public class MyViewModel extends ViewModelCore {
-...
+   ...
    private String login;
 
    @Bindable
@@ -122,7 +122,7 @@ public class MyViewModel extends ViewModelCore {
            notifyPropertyChanged(BR.login);
        }
    }
-...
+   ...
 }
 ```
 
