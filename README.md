@@ -148,6 +148,8 @@ and corresponding layout (some usual xml code is omitted for brevity):
 #### ViewModel notifications
 MvvmCore provides additional way to broadcast notifications outside `ViewModel` and handle them either by `Activity` or by special `NotificationHandler` (global notifications).
 
+For example, as `ViewModel` doesn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring. 
+
 
 And nothing about ViewModelFactory, ViewModelProvider, Dagger2 MultiBindingModules, DataBindingUtil and other stuff concerning ViewModel creation and databinding. All under the hood! 
 
