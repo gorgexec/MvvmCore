@@ -181,6 +181,5 @@ In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` 
 
 Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library and resubscribed again when `onResume` occurs. So, you shouldn't care about it by youself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization (for `Activity` it is `onCreate()` method, in case of `Fragment` - `onActivityCreated()` or `onBindingReady()`).
 
-
-
 #### ViewModel global notifications
+Sometimes, it's required to issue similar notifications by different ViewModels and handle them equally over all Views. And that's deal for custom `NotificationHandler`.
