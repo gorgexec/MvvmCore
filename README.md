@@ -153,22 +153,29 @@ For example, as `ViewModel` doesn't have direct reference to `Context`, the one 
 So, it can be done out of the box with the help of MvvmCore ViewModel `notifyView()` method, that accepts parameter of any type as notification content:
 ```java
 public class MyViewModel extends ViewModelCore {
-   .....
-   private void onDataFetched(Data data) {
-      notifyView(new ShowDataFragment(data));
+   ...
+   public void onClose() {
+      ...
+      notifyView(new Finish());
    }
-   ....
-   public static class ShowDataFragment {
-      .....
-      public ShowDataFragment(Data data) {
-         this.data = data;
-      }
+   ...
+   public static class Finish {
+    ...
    }
-
 }
-
-
-
-
-MainViewModel
 ```
+
+and `Activity`:
+
+```java
+public class MyActivity extends ActivityCore<MyViewModel> {
+ @Override
+    protected void onCreate(Bundle savedInstanceState) {
+     super.onCreate(savedInstanceState);
+     setContentView(R.layout.activity_my, MyViewModel.class);
+    
+     subscribeNotification(MyViewModel.Finish.class, notification -> finish());
+    }
+}
+```
+
