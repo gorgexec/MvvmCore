@@ -145,7 +145,7 @@ and corresponding layout (some usual xml code is omitted for brevity):
  
 </layout
 ```    
-#### ViewModel notifications
+#### ViewModel-to-View notifications
 MvvmCore provides additional way to broadcast notifications outside `ViewModel` and handle them either by `Activity/Fragment` or by special `NotificationHandler` (in case of global notifications).
 
 For example, as `ViewModel` shouldn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations this is usually done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring and code - bloated. 
@@ -177,4 +177,10 @@ public class MyActivity extends ActivityCore<MyViewModel> {
     }
 }
 ```
-In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call.
+In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call, and in accordance with `Activity` lifecycle `MyViewModel` will be also disposed.
+
+Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library. So, you shouldn't care about it by youself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization.
+
+
+
+#### ViewModel global notifications
