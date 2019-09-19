@@ -165,7 +165,7 @@ public class MyViewModel extends ViewModelCore {
 }
 ```
 
-and subscribed to model notification `Activity`:
+and the `Activity` subscribed to model notification:
 
 ```java
 public class MyActivity extends ActivityCore<MyViewModel> {
