@@ -179,7 +179,7 @@ public class MyActivity extends ActivityCore<MyViewModel> {
 ```
 In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call, and in accordance with `Activity` lifecycle `MyViewModel` will be also disposed.
 
-Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library. So, you shouldn't care about it by youself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization.
+Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library. So, you shouldn't care about it by youself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization (for `Activity` it is `onCreate()` method, in case of `Fragment` - `onActivityCreated()` or `onBindingReady()`).
 
 
 
