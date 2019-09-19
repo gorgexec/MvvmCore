@@ -164,8 +164,7 @@ public class MyViewModel extends ViewModelCore {
    }
 }
 ```
-
-and the `Activity` subscribed to model notification:
+and the `Activity` subscribed to the model notification:
 
 ```java
 public class MyActivity extends ActivityCore<MyViewModel> {
@@ -173,9 +172,9 @@ public class MyActivity extends ActivityCore<MyViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
      setContentView(R.layout.activity_my, MyViewModel.class);
-    
+     ...
      subscribeNotification(MyViewModel.Finish.class, notification -> finish());
     }
 }
 ```
-
+In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call.
