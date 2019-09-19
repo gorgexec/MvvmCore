@@ -148,9 +148,9 @@ and corresponding layout (some usual xml code is omitted for brevity):
 #### ViewModel notifications
 MvvmCore provides additional way to broadcast notifications outside `ViewModel` and handle them either by `Activity/Fragment` or by special `NotificationHandler` (in case of global notifications).
 
-For example, as `ViewModel` doesn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations usually this is done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring. 
+For example, as `ViewModel` shouldn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations this is usually done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring and code - bloated. 
 
-So, it can be done out of the box with the help of MvvmCore ViewModel `notifyView()` method, that accepts parameter of any type as notification content:
+So, it can be done easier with the help of MvvmCore ViewModel `notifyView()` method, that accepts parameter of any type as notification content:
 ```java
 public class MyViewModel extends ViewModelCore {
    ...
@@ -165,7 +165,7 @@ public class MyViewModel extends ViewModelCore {
 }
 ```
 
-and `Activity`:
+and subscribed to model notification `Activity`:
 
 ```java
 public class MyActivity extends ActivityCore<MyViewModel> {
