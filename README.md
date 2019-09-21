@@ -202,6 +202,6 @@ public class QuitAppHandler implements INotificationHandler<QuitApp> {
 
 Note:
 * `QuitApp` is a `ViewModel` notification that will may be called by any `ViewModel` with the help of `notifyView()` method.
-* As your handler implementation is resolved by Dagger2, it either should be decalared in corresponding Dagger2 module or have constructor denoted with `@Inject` annotation.
+* As your handler implementation is resolved by Dagger2, it should either be decalared in corresponding Dagger2 module or have a constructor denoted with `@Inject` annotation like in the example above.
 
 That's it. The rest is done automatically by prebuild processing.
