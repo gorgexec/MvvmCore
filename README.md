@@ -182,4 +182,26 @@ In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` 
 Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library and resubscribed again when `onResume` occurs. So, you shouldn't care about it by yourself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization (for `Activity` it is `onCreate()` method, in case of `Fragment` - `onActivityCreated()` or `onBindingReady()`).
 
 #### ViewModel global notifications
-Sometimes, it's required to issue similar notifications by different ViewModels and handle them equally over all Views. And that's a deal for custom `NotificationHandler`.
+Sometimes, it's required to issue similar notifications by different ViewModels and handle them equally over all Views. Usually that is the case for common tasks like showing Dialog/Toast, open Document or quit app by `ViewModel` command. And that's a deal for custom `NotificationHandler`. All you have to do is to implement `INotificationHandler` interface as the following: 
+
+```java
+public class QuitAppHandler implements INotificationHandler<QuitApp> {
+  private final Context context;
+  
+   @Inject
+   public QuitAppHandler(Context context) {
+        this.context = context;
+   }
+   @Override
+   public void handle(ActivityCore activity, QuitApp notification) {
+    context.stopService(new Intent(context, AppService.class));
+    activity.finishAffinity();
+   }
+}
+```
+
+Note:
+* `QuitApp` is a `ViewModel` notification that will may be called by any `ViewModel` with the help of `notifyView()` method.
+* As your handler implementation is resolved by Dagger2, it either should be decalared in corresponding Dagger2 module or have constructor denoted with `@Inject` annotation.
+
+That's it. The rest is done automatically by prebuild processing.
