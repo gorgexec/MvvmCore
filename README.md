@@ -65,7 +65,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 ```
 
 #### Activity result handlers
-TBD
+What if a `ViewModel` 
 
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But there are slightly differences in preparation.
