@@ -258,7 +258,7 @@ dependencies {
 
 ### Setting up Dagger2
 
-In order MvvmCore to be properly used with your app, some settings with app components must be fulfilled.
+In order MvvmCore to be properly used with your app, some settings must be fulfilled.
 
 1. Your app should contain class extended from `AppCoreConfig` class.
 
