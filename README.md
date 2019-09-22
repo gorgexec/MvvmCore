@@ -256,11 +256,15 @@ dependencies {
 }
 ```
 
-### Setting up Dagger2
+### Setting up project
 
 In order MvvmCore to be properly used with your app, some settings must be fulfilled.
 
+#### AppConfig
+
 1. Your app should contain class extended from `AppCoreConfig` class (e.g. `AppConfig`).
+
+#### Dagger2
 
 2. Your app should have at least one Dagger2 component.
 
@@ -283,6 +287,8 @@ public interface AppComponent extends AppCoreComponent {
     }
 }
 ```
+
+#### Application class
 
 5. Your app should have `Application` (e.g. `App`) class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
 
