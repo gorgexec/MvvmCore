@@ -264,16 +264,15 @@ In order MvvmCore to be properly used with your app, some settings must be fulfi
 
 2. Your app should have at least one Dagger2 component.
 
-3. Top-level Dagger2 component sould be extended from `AppCoreComponent` (e.g. `AppComponent`) and contain component `Factory` with at least two parameters:
+3. Top-level Dagger2 component sould be extended from `AppCoreComponent` (e.g. `AppComponent`) and contain component `Factory` method with at least two parameters:
 
 ```java
- @Component.Factory
-    interface Factory {
-        AppComponent create(@BindsInstance Context context, @BindsInstance AppCoreConfig appCoreConfig);
-    }
+Context context, AppCoreConfig appCoreConfig
 ```
 
-4. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple) that corresponds to `Activity` scope should include `CoreBindingsModule`:
+4. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple) that corresponds to `Activity` scope should include `CoreBindingsModule`.
+
+So, the component code may be like:
 
 ```java
 @Component(modules = {CoreBindingsModule.class})
