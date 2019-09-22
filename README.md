@@ -65,7 +65,7 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 ```
 
 #### Activity result handlers
-What if a `ViewModel` 
+What if its necessary to process `onActivityResult` callback by a `ViewModel`? MvvmCore lets to achieve that with the less code involved by implementing `IActivityResultHandler`:
 
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But there are slightly differences in preparation.
