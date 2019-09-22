@@ -240,3 +240,20 @@ Note:
 * As your handler implementation is resolved by Dagger2, it should either be decalared in corresponding Dagger2 module or have a constructor denoted with `@Inject` annotation like in the example above.
 
 That's it. The rest is done automatically by prebuild processing.
+
+## Installation
+
+### Gradle
+
+```xml
+repositories {
+    jcenter()
+}
+
+dependencies {
+  implementation 'com.gorgexec.mvvmcore:mvvmcore:1.0.2'
+  annotationProcessor 'com.gorgexec.mvvmcore:compiler:1.0.2'
+}
+```
+
+### Setting up Dagger2
