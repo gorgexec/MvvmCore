@@ -98,9 +98,9 @@ The example above shows, how to pass the result of document selection processed 
 
 2. A `ViewModel` should implement custom interface (`IOpenDocumentTarget` in example case).
 
-3. The handling code that is placed in `onActivityResult()` callback of `ActivityResultHandler`
+3. The handling code is placed in `onActivityResult()` callback of activity result handler.
 
-4. In order to get necessary `ViewModel`, the utility method `findImplementationOf()` can be used.
+4. In order to get the necessary `ViewModel`, the utility method `findImplementationOf()` can be used. If target `ViewModel` is owned by `Fragment`, it will also be find by the method.
 
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But there are slightly differences in preparation.
