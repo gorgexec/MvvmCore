@@ -65,7 +65,34 @@ public class MainActivity extends BindableActivityCore<ActivityMainBinding, Main
 ```
 
 #### Activity result handlers
-What if its necessary to process `onActivityResult` callback by a `ViewModel`? MvvmCore lets to achieve that with the less code involved by implementing `IActivityResultHandler`:
+What if its necessary to process `onActivityResult` callback by a `ViewModel`? MvvmCore lets to achieve that with no code bloated the `Activity` itself by simply implementing `IActivityResultHandler`:
+
+```java
+@ActivityResultHandler(100)
+public class OpenDocumentHandler implements IActivityResultHandler {
+
+    @Inject
+    public OpenDocumentHandler() {}
+
+    @Override
+    public void onActivityResult(ActivityCore activity, int requestCode, int resultCode, @Nullable Intent data) {
+        IOpenDocumentTarget target = (IOpenDocumentTarget) activity.findImplementationOf(IOpenDocumentTarget.class);
+        if (target != null) {
+            if (resultCode == RESULT_OK) {
+                target.onDocumentReady(data.getData());
+            } else if (resultCode == RESULT_CANCELED) {
+                target.onDocumentCanceled();
+            }
+        }
+    }
+
+    public interface IOpenDocumentTarget {
+        void onDocumentReady(Uri uri);
+        void onDocumentCanceled();
+    }
+}
+```
+The example above shows, how to pass the result of document selection to a `ViewModel`. In this case, the `ViewModel` should implement custom interface `IOpenDocumentTarget`, and the handling code that is placed in `onActivityResult()`  callback of the handler, uses utility method `findImplementationOf()` from activity to find `ViewModel` that implements necessary interface to process results.
 
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But there are slightly differences in preparation.
