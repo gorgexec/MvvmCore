@@ -259,12 +259,14 @@ dependencies {
 ### Setting up Dagger2
 In order MvvmCore to be properly used with your app, some settings with app components must be fulfilled.
 
-1. Your app module should have at least one Dagger2 component.
+1. Your app should have at least one Dagger2 component.
 
 2. Top-level Dagger2 component sould be extended from `AppCoreComponent`.
 
-3. Your app module should have `Application` class extended from `AppCore` with top-level Dagger2 component as the type-parameter for `AppCore`
+3. The component/subcomponent that corresponds to `Activity` scope should include `CoreBindingsModule`.
 
-4. `Application` class should be registered in AndroidManifest under the `android:name` field of `<application/>` tag.
+4. Your app should have `Application` class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
 
-5.
+5. `Application` class should be registered in `AndroidManifest` under the `android:name` field of `<application/>` tag.
+
+6.
