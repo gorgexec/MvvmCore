@@ -286,9 +286,9 @@ public interface AppComponent extends AppCoreComponent {
 
 5. Your app should have `Application` (e.g. `App`) class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
 
-6. Your `App` class should be registered in `AndroidManifest` under the `android:name` field of `<application/>` tag.
+6. Your `Application` class should be registered in `AndroidManifest` under the `android:name` field of `<application/>` tag.
 
-7. Your `App` class should have overrided `onCreate` calback with `setAppComponent()` method call, that accepts initialized Dagger2 root component.
+7. Your `Application` class should have overrided `onCreate` calback with `setAppComponent()` method call, that accepts initialized Dagger2 root component.
 
 Generally, the code will be like the following:
 
