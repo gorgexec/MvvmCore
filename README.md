@@ -92,7 +92,7 @@ public class OpenDocumentHandler implements IActivityResultHandler {
     }
 }
 ```
-The example above shows, how to pass the result of document selection to a `ViewModel`. In this case, the `ViewModel` should implement custom interface `IOpenDocumentTarget`, and the handling code that is placed in `onActivityResult()`  callback of the handler, uses utility method `findImplementationOf()` from activity to find `ViewModel` that implements necessary interface to process results.
+The example above shows, how to pass the result of document selection to a `ViewModel`. In this case, the `ViewModel` should implement custom interface `IOpenDocumentTarget`, and the handling code that is placed in `onActivityResult()`  callback of `OpenDocumentHandler`, uses utility method `findImplementationOf()` from activity to find `ViewModel` that implements necessary interface to process results.
 
 ### Fragment
 The library provides the same abilities for Fragments as for Activities. But there are slightly differences in preparation.
