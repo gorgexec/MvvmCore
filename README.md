@@ -245,7 +245,7 @@ That's it. The rest is done automatically by prebuild processing.
 
 ### Gradle
 
-```
+```gradle
 repositories {
     jcenter()
 }
