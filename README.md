@@ -272,7 +272,7 @@ Context context, AppCoreConfig appCoreConfig
 
 4. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple) that corresponds to `Activity` scope should include `CoreBindingsModule`.
 
-So, the component code may be like:
+So, totally the component code may be like:
 
 ```java
 @Component(modules = {CoreBindingsModule.class})
@@ -281,6 +281,7 @@ public interface AppComponent extends AppCoreComponent {
     interface Factory {
         AppComponent create(@BindsInstance Context context, @BindsInstance AppCoreConfig appCoreConfig);
     }
+}
 ```
 
 5. Your app should have `Application` (e.g. `App`) class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
