@@ -321,3 +321,8 @@ public class App extends AppCore<AppComponent> {
      return getAppComponent().activityComponentFactory().create();
  }
 ```
+
+##Addons
+
+### RxJava shortcuts
+TBD
