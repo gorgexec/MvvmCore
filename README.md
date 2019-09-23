@@ -278,7 +278,7 @@ The config class is available through `appConfig()` method of MvvmCore `Activity
 
 3. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple components are used) that corresponds to `Activity` scope must be also extended from `ActivityCoreComponent` interface and include `CoreBindingsModule`. Note, that `CoreBindingsModule` is composed during compile time, thus at the first build it would not be found.  
 
-So, totally the component code may be like:
+So, totally the component code may be like that:
 
 ```java
 @Component(modules = {CoreBindingsModule.class})
@@ -292,24 +292,32 @@ public interface AppComponent extends AppCoreComponent, ActivityCoreComponent {
 
 #### Application class
 
-5. Your app should have `Application` (e.g. `App`) class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
+1. Your app should have `Application` class extended from `AppCore` with top-level Dagger2 component as the type-parameter.
 
-6. Your `Application` class should be registered in `AndroidManifest` under the `android:name` field of `<application/>` tag.
+2. `Application` class must be annotated with `@MvvmCoreApp`.
 
-7. Your `Application` class should have overrided `onCreate` calback with `setAppComponent()` method call, that accepts initialized Dagger2 root component.
+2. Your `Application` class must be registered in `AndroidManifest.xml` under the `android:name` field of `<application/>` tag.
+
+3. Overrided `onCreate` calback of the extended `Application` class must invoke `setAppComponent()` method, that accepts initialized Dagger2 root component.
 
 Generally, the code will be like the following:
 
 ```java
+@MvvmCoreApp
 public class App extends AppCore<AppComponent> {
-
     @Override
     public void onCreate() {
         super.onCreate();
         setAppComponent(DaggerAppComponent.factory().create(this, new AppConfig()));
     }
 }
-
 ```
 
-Subcomponents
+4. If your Dagger2 configuration consists of several components (subcomponents), it is required to additionally override `getActivityComponent()` method of extended `Application` class, so that MvvmCore will know, how to get Activity scope related component:
+
+```java
+ @Override
+ public ActivityCoreComponent getActivityComponent() {
+     return getAppComponent().activityComponentFactory().create();
+ }
+```
