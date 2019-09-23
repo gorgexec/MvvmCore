@@ -245,6 +245,8 @@ That's it. The rest is done automatically by prebuild processing.
 
 ### Gradle
 
+1.Check repository and include library dependencies:
+
 ```gradle
 repositories {
     jcenter()
@@ -256,7 +258,20 @@ dependencies {
 }
 ```
 
-It is also important to include Dagger2 dependency to your project.
+2. Include Dagger2 dependency to your project.
+
+3. Check additional gradle options in your app's module `build.gradle` file:
+
+```gradle
+ compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+```
+
 
 ### Setting up project
 
