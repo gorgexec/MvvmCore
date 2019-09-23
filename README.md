@@ -272,21 +272,17 @@ The config class is available through `appConfig()` method of MvvmCore `Activity
 
 #### Dagger2
 
-2. Your app should have at least one Dagger2 component.
+1. Your app must have at least one Dagger2 component.
 
-3. Top-level Dagger2 component sould be extended from `AppCoreComponent` (e.g. `AppComponent`) and contain component `Factory` method with at least two parameters:
+2. Top-level Dagger2 component must be extended from `AppCoreComponent` and contain component `Factory` method accepting at least `Context` and `AppCoreConfig` as parameters.
 
-```java
-Context context, AppCoreConfig appCoreConfig
-```
-
-4. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple) that corresponds to `Activity` scope should include `CoreBindingsModule`.
+3. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple components are used) that corresponds to `Activity` scope must be also extended from `ActivityCoreComponent` interface and include `CoreBindingsModule`. Note, that `CoreBindingsModule` is composed during compile time, thus at the first build it would not be found.  
 
 So, totally the component code may be like:
 
 ```java
 @Component(modules = {CoreBindingsModule.class})
-public interface AppComponent extends AppCoreComponent {
+public interface AppComponent extends AppCoreComponent, ActivityCoreComponent {
     @Component.Factory
     interface Factory {
         AppComponent create(@BindsInstance Context context, @BindsInstance AppCoreConfig appCoreConfig);
