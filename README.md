@@ -322,7 +322,7 @@ public class App extends AppCore<AppComponent> {
  }
 ```
 
-##Addons
+## Addons
 
 ### RxJava shortcuts
 TBD
