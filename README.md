@@ -245,7 +245,7 @@ That's it. The rest is done automatically by prebuild processing.
 
 ### Gradle
 
-1.Check repository and include library dependencies:
+1. Check repository and include library dependencies:
 
 ```gradle
 repositories {
