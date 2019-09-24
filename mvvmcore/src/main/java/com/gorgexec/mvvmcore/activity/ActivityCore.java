@@ -18,7 +18,8 @@ import com.gorgexec.mvvmcore.app.AppCore;
 import com.gorgexec.mvvmcore.app.AppCoreConfig;
 import com.gorgexec.mvvmcore.dagger.ActivityCoreComponent;
 import com.gorgexec.mvvmcore.dagger.AppCoreComponent;
-import com.gorgexec.mvvmcore.notification.INotificationHandler;
+import com.gorgexec.mvvmcore.fragment.FragmentCore;
+import com.gorgexec.mvvmcore.notification.ILocalNotificationHandler;
 import com.gorgexec.mvvmcore.viewModel.ViewModelCore;
 
 import java.util.Map;
@@ -26,35 +27,34 @@ import java.util.Map;
 
 public abstract class ActivityCore<TModel extends ViewModelCore> extends AppCompatActivity {
 
+    private TModel model;
+
     protected int navHostId;
 
     protected ActivityResultDispatcher activityResultDispatcher;
 
     protected ViewModelNotificationDispatcher modelNotificationDispatcher;
 
+    public TModel model() {
+        return model;
+    }
+
     public AppCoreComponent getAppComponent() {
-        return ((AppCore) this.getApplicationContext()).getCoreAppComponent();
+        return ((AppCore) this.getApplicationContext()).getAppComponent();
     }
 
     public ActivityCoreComponent getActivityComponent() {
-        return ((AppCore) this.getApplicationContext()).getCoreActivityComponent();
+        return ((AppCore) this.getApplicationContext()).getActivityComponent();
     }
 
-    public AppCoreConfig appCoreConfig() {
+    public AppCoreConfig appConfig() {
         return getAppComponent().appConfig();
     }
 
-    public ActivityProvider activityProvider(){
-        return getAppComponent().activityProvider();
-    }
-
-
-    public TModel model;
-
     protected void prepareModel(Class<TModel> modelClass) {
         model = new ViewModelProvider(this, getActivityComponent().viewModels()).get(modelClass);
-        model.setAppCoreConfig(appCoreConfig());
-        modelNotificationDispatcher = new ViewModelNotificationDispatcher(getActivityComponent().notificationHandlers(), this, model);
+        model.setAppCoreConfig(appConfig());
+        modelNotificationDispatcher = new ViewModelNotificationDispatcher(getActivityComponent().notificationHandlers(), this, this, model);
     }
 
     protected void setContentView(int layoutId, Class<TModel> modelClass) {
@@ -64,8 +64,7 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
 
     @Override
     protected void onResume() {
-        getAppComponent().activityProvider().setActivity(this);
-        if(model != null) {
+        if (model != null) {
             modelNotificationDispatcher.subscribe();
             model.onResume();
         }
@@ -74,8 +73,7 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
 
     @Override
     protected void onPause() {
-        getAppComponent().activityProvider().removeActivity(this);
-        if(model != null) {
+        if (model != null) {
             model.onPause();
             modelNotificationDispatcher.unsubscribe();
         }
@@ -90,7 +88,7 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
 
     @Override
     protected void onDestroy() {
-        if(model != null) {
+        if (model != null) {
             modelNotificationDispatcher.dispose();
         }
         super.onDestroy();
@@ -98,11 +96,11 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        activityResultDispatcher.dispatch(requestCode, resultCode, data);
+        activityResultDispatcher.dispatch(this, requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    protected <T> void subscribeNotification(Class<T> notificationClass, INotificationHandler<T> handler) {
+    protected <T> void subscribeNotification(Class<T> notificationClass, ILocalNotificationHandler<T> handler) {
         modelNotificationDispatcher.addHandler(notificationClass, handler);
     }
 
@@ -155,5 +153,29 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
     public void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(findViewById(android.R.id.content).getWindowToken(), 0);
+    }
+
+
+    @Nullable
+    public <T> T findImplementationOf(Class<T> clazz) {
+        T res = findImplementationOf(model(), clazz);
+        if (res == null) {
+            Fragment f = getCurrentDestinationFragment();
+            if (f instanceof FragmentCore) {
+                FragmentCore fragmentCore = (FragmentCore) f;
+                res = findImplementationOf(fragmentCore.model(), clazz);
+            }
+        }
+        return res;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    private <T,R> R findImplementationOf(T obj, Class<R> clazz) {
+        try {
+            return obj.getClass().asSubclass(clazz) != null ? (R)obj : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

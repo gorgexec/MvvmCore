@@ -15,6 +15,7 @@ public class ActivityResultHandlerFactory extends MapValuesFactory<Integer, IAct
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends IActivityResultHandler> T create(int requestCode) {
         return (T) super.create(requestCode);
     }

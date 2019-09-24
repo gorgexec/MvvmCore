@@ -1,7 +1,6 @@
 package com.gorgexec.mvvmcore.compiler;
 
 import com.gorgexec.mvvmcore.annotations.ActivityResultHandler;
-import com.gorgexec.mvvmcore.annotations.NotificationHandler;
 import com.gorgexec.mvvmcore.annotations.ViewModelOwner;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
@@ -23,6 +22,7 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
@@ -33,22 +33,27 @@ import javax.lang.model.type.TypeMirror;
 
 
 @SupportedAnnotationTypes({
+        "com.gorgexec.mvvmcore.annotations.MvvmCoreApp",
         "com.gorgexec.mvvmcore.annotations.ViewModelOwner",
-        "com.gorgexec.mvvmcore.annotations.NotificationHandler",
         "com.gorgexec.mvvmcore.annotations.ActivityResultHandler"
 })
 
 public class CoreBindingsProcessor extends AbstractProcessor {
-
-    private static final String DEFAULT_PACKAGE_NAME = "com.gorgexec.mvvmcore";
-    private static final String CLASSNAME = "CoreBindingsModule";
-
-    private static final String ACTIVITY_CORE_CLASSNAME = "ActivityCore";
-    private static final String FRAGMENT_CORE_CLASSNAME = "FragmentCore";
-
     private static final String MODULE_PACKAGE_OPTION_KEY = "android.databinding.modulePackage";
-    private static final String INOTIFICATION_HANDLER = "com.gorgexec.mvvmcore.notification.INotificationHandler";
-    private static final String IACTIVITY_RESULT_HANDLER = "com.gorgexec.mvvmcore.activity.IActivityResultHandler";
+    private static final String DEFAULT_PACKAGE_NAME = "com.gorgexec.mvvmcore";
+    private static final String IMPLEMENTATION_CLASSNAME = "CoreBindingsModule";
+
+    private static final String ActivityCoreClassName = "ActivityCore";
+    private static final String FragmentCoreClassName = "FragmentCore";
+
+
+    private static final String INotificationHandlerName = "com.gorgexec.mvvmcore.notification.INotificationHandler";
+    private static final String IActivityResultHandlerName = "com.gorgexec.mvvmcore.activity.IActivityResultHandler";
+
+    private static final String ViewModelStubName = "com.gorgexec.mvvmcore.stub.ViewModelStub";
+    private static final String ViewNotificationStubName = "com.gorgexec.mvvmcore.stub.ViewNotificationStub";
+    private static final String NotificationHandlerStubName = "com.gorgexec.mvvmcore.stub.NotificationHandlerStub";
+    private static final String ActivityResultHandlerStubName = "com.gorgexec.mvvmcore.stub.ActivityResultHandlerStub";
 
     private static ClassName includeModuleClass = ClassName.get("com.gorgexec.mvvmcore.dagger", "BindingsModule");
     private static ClassName annotationModuleClass = ClassName.get("dagger", "Module");
@@ -77,30 +82,29 @@ public class CoreBindingsProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
 
-        //fill view models list
+    @Override
+    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         for (Element element : roundEnvironment.getRootElements()) {
+            TypeElement typeElement = (TypeElement) element;
             if(isViewModelOwner(element)){
-                TypeElement typeElement = (TypeElement) element;
+                //fill view models list
                 TypeMirror typeMirror = typeElement.getSuperclass();
                 DeclaredType declaredType = (DeclaredType) typeMirror;
-                if (declaredType.getTypeArguments().size() > 1) {
-                    models.add(declaredType.getTypeArguments().get(1));
-                }
-            }
-        }
+                models.add(declaredType.getTypeArguments().get(0));
 
-        //fill notification handlers list
-        for (Element element : roundEnvironment.getElementsAnnotatedWith(NotificationHandler.class)) {
-            if (element.getKind() == ElementKind.CLASS) {
-                TypeElement notificationHandlerElement = (TypeElement) element;
-                TypeMirror notificationHandlerInterface = extractInterface(notificationHandlerElement.getInterfaces(), INOTIFICATION_HANDLER);
+            }
+            else {
+                //fill notification handlers list
+                TypeMirror notificationHandlerInterface = extractInterface(typeElement.getInterfaces(), INotificationHandlerName);
                 if (notificationHandlerInterface != null) {
                     DeclaredType declaredType = (DeclaredType) notificationHandlerInterface;
                     List<? extends TypeMirror> arguments = declaredType.getTypeArguments();
                     if (arguments != null && arguments.size() == 1) {
-                        notificationHandlers.put(arguments.get(0).toString(), notificationHandlerElement.asType());
+                        notificationHandlers.put(arguments.get(0).toString(), typeElement.asType());
                     }
                 }
             }
@@ -110,13 +114,29 @@ public class CoreBindingsProcessor extends AbstractProcessor {
         for (Element element : roundEnvironment.getElementsAnnotatedWith(ActivityResultHandler.class)) {
             if (element.getKind() == ElementKind.CLASS) {
                 TypeElement activityResultHandlerElement = (TypeElement) element;
-                TypeMirror activityResultHandlerInterface = extractInterface(activityResultHandlerElement.getInterfaces(), IACTIVITY_RESULT_HANDLER);
+                TypeMirror activityResultHandlerInterface = extractInterface(activityResultHandlerElement.getInterfaces(), IActivityResultHandlerName);
                 if (activityResultHandlerInterface != null) {
                     activityResultHandlers.put(element.getAnnotation(ActivityResultHandler.class).value(), activityResultHandlerElement.asType());
                 }
             }
         }
 
+        //add stubs, if required
+        if(models.isEmpty()){
+           models.add(processingEnv.getElementUtils().getTypeElement(ViewModelStubName).asType());
+        }
+
+        if(notificationHandlers.isEmpty()){
+            TypeElement element = processingEnv.getElementUtils().getTypeElement(NotificationHandlerStubName);
+            notificationHandlers.put(ViewNotificationStubName, element.asType());
+        }
+
+        if(activityResultHandlers.isEmpty()){
+            TypeElement element = processingEnv.getElementUtils().getTypeElement(ActivityResultHandlerStubName);
+            activityResultHandlers.put(-1, element.asType());
+        }
+
+        //implementation
         implement();
 
         return false;
@@ -128,7 +148,7 @@ public class CoreBindingsProcessor extends AbstractProcessor {
                 .addMember("includes", "$L", includeModuleClass.toString() + ".class").build();
 
         TypeSpec.Builder classBuilder = TypeSpec
-                .classBuilder(CLASSNAME)
+                .classBuilder(IMPLEMENTATION_CLASSNAME)
                 .addAnnotation(includeModuleAnnotation)
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
 
@@ -149,7 +169,7 @@ public class CoreBindingsProcessor extends AbstractProcessor {
                             .build(),
                     ParameterSpec.builder(ParameterizedTypeName.get(entry.getValue()), "handler")
                             .build()).returns(
-                    ParameterizedTypeName.get(ClassName.bestGuess(INOTIFICATION_HANDLER), WildcardTypeName.subtypeOf(Object.class)))
+                    ParameterizedTypeName.get(ClassName.bestGuess(INotificationHandlerName), WildcardTypeName.subtypeOf(Object.class)))
                     .build());
         }
 
@@ -160,7 +180,7 @@ public class CoreBindingsProcessor extends AbstractProcessor {
                             .build(),
                     ParameterSpec.builder(ParameterizedTypeName.get(entry.getValue()), "handler")
                             .build())
-                    .returns(ClassName.bestGuess(IACTIVITY_RESULT_HANDLER))
+                    .returns(ClassName.bestGuess(IActivityResultHandlerName))
                     .build());
         }
 
@@ -215,8 +235,8 @@ public class CoreBindingsProcessor extends AbstractProcessor {
     }
 
     private static boolean isViewModelOwner(Element element){
-        return (isSubTypeOf(element, FRAGMENT_CORE_CLASSNAME) && element.getAnnotation(ViewModelOwner.class) != null)
-                || isSubTypeOf(element, ACTIVITY_CORE_CLASSNAME);
+        return (isSubTypeOf(element, FragmentCoreClassName) && element.getAnnotation(ViewModelOwner.class) != null)
+                || isSubTypeOf(element, ActivityCoreClassName);
     }
 
 }

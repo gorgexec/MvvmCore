@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/gorgexec/MvvmCore'
     gitUrl = 'https://github.com/gorgexec/MvvmCore.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     developerId = 'gorgexec'
     developerName = 'George S'
@@ -23,6 +23,9 @@ ext {
     licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

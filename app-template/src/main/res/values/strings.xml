@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MvvmCore application template</string>
+
+    <string name="intro">This is empty example template project with MvvmCore library set up.</string>
+
+</resources>

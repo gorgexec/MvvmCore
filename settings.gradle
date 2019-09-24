@@ -1,2 +1,2 @@
-include ':app', ':annotations', ':compiler', ':mvvmcore', ':rx'
+include ':app', ':annotations', ':compiler', ':mvvmcore', ':rx', ':app-template'
 rootProject.name='MvvmCore'

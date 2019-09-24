@@ -14,9 +14,13 @@ import androidx.databinding.ViewDataBinding;
 
 import com.gorgexec.mvvmcore.viewModel.ViewModelCore;
 
-public abstract class BindableFragmentCore<TBinding extends ViewDataBinding, TModel extends ViewModelCore> extends FragmentCore<TModel> {
+public abstract class BindableFragmentCore<TModel extends ViewModelCore, TBinding extends ViewDataBinding> extends FragmentCore<TModel> {
 
-    protected TBinding binding;
+    private TBinding binding;
+
+    protected TBinding binding(){
+        return binding;
+    }
 
     public BindableFragmentCore(@LayoutRes int layoutRes, @IdRes int destinationId, @NonNull Class<TModel> modelClass) {
         super(layoutRes, destinationId, modelClass);
@@ -37,10 +41,10 @@ public abstract class BindableFragmentCore<TBinding extends ViewDataBinding, TMo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        binding.setVariable(activityCore().appCoreConfig().getDefaultModelBR(), model);
+        binding.setVariable(activityCore().appConfig().getDefaultModelBR(), model());
         onBindingReady();
     }
 
-    protected abstract void onBindingReady();
+    protected void onBindingReady(){}
 
 }

@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">MvvmCore</string>
+    <string name="app_name">MvvmCore Demo App</string>
+
+    <string name="mainDialogTitle">MvvmCore</string>
+    <string name="mainDialogMessage">Hello world! This is MvvmCore powered dialog.</string>
+    <string name="mainDialogMessage2">Button clicked</string>
+
+    <string name="buttonShowDialog">Show dialog</string>
+
+    <string name="buttonDialogYes">Yes</string>
+    <string name="buttonDialogNo">No</string>
+    <string name="buttonDialogCancel">Cancel</string>
+    <string name="buttonDialogSubmit">OK</string>
 </resources>

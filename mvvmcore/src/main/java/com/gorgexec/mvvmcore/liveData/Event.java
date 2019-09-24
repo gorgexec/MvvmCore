@@ -31,7 +31,7 @@ public class Event<T> {
         return res;
     }
 
-    public static <T> EventObserver<T> map(IEventHandler<T> eventHandler){
+    public static <T> EventObserver<T> handle(IEventHandler<T> eventHandler){
         return new EventObserver<>(eventHandler);
     }
 

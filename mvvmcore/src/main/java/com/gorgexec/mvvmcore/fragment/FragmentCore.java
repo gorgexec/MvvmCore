@@ -19,14 +19,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.gorgexec.mvvmcore.activity.ActivityCore;
 import com.gorgexec.mvvmcore.activity.ViewModelNotificationDispatcher;
 import com.gorgexec.mvvmcore.annotations.ViewModelOwner;
-import com.gorgexec.mvvmcore.notification.INotificationHandler;
+import com.gorgexec.mvvmcore.notification.ILocalNotificationHandler;
 import com.gorgexec.mvvmcore.viewModel.ViewModelCore;
 
 public abstract class FragmentCore<TModel extends ViewModelCore> extends Fragment {
 
     protected ViewModelNotificationDispatcher modelNotificationDispatcher;
 
-    public TModel model;
+    private TModel model;
     protected int layoutRes;
     protected int destinationId;
     protected Class<TModel> modelClass;
@@ -65,11 +65,12 @@ public abstract class FragmentCore<TModel extends ViewModelCore> extends Fragmen
 
     @Override
     public void onResume() {
+        super.onResume();
         if(model != null) {
             modelNotificationDispatcher.subscribe();
             model.onResume();
         }
-        super.onResume();
+
     }
 
     @Override
@@ -89,6 +90,10 @@ public abstract class FragmentCore<TModel extends ViewModelCore> extends Fragmen
         super.onDetach();
     }
 
+    public TModel model(){
+        return model;
+    }
+
     protected ActivityCore activityCore(){
         return (ActivityCore)requireActivity();
     }
@@ -97,8 +102,8 @@ public abstract class FragmentCore<TModel extends ViewModelCore> extends Fragmen
         if(modelClass!=null) {
             boolean isModelOwner = getClass().getAnnotation(ViewModelOwner.class) != null;
             model = new ViewModelProvider(isModelOwner ? this : activityCore(), activityCore().getActivityComponent().viewModels()).get(modelClass);
-            model.setAppCoreConfig(activityCore().appCoreConfig());
-            modelNotificationDispatcher = new ViewModelNotificationDispatcher(activityCore().getActivityComponent().notificationHandlers(), this, model);
+            model.setAppCoreConfig(activityCore().appConfig());
+            modelNotificationDispatcher = new ViewModelNotificationDispatcher(activityCore().getActivityComponent().notificationHandlers(), this, activityCore(), model);
         }
     }
 
@@ -125,7 +130,7 @@ public abstract class FragmentCore<TModel extends ViewModelCore> extends Fragmen
         }
     }
 
-    protected <T> void subscribeNotification(Class<T> notificationClass, INotificationHandler<T> handler) {
+    protected <T> void subscribeNotification(Class<T> notificationClass, ILocalNotificationHandler<T> handler) {
         if(modelNotificationDispatcher!=null) {
             modelNotificationDispatcher.addHandler(notificationClass, handler);
         }

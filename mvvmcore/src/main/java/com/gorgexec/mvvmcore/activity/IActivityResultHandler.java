@@ -5,5 +5,5 @@ import android.content.Intent;
 import androidx.annotation.Nullable;
 
 public interface IActivityResultHandler {
-    void onActivityResult(int requestCode, int resultCode, @Nullable Intent data);
+    void onActivityResult(ActivityCore activity, int resultCode, @Nullable Intent data);
 }

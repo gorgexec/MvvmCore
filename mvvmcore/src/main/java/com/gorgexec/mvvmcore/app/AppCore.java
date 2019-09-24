@@ -5,8 +5,19 @@ import android.app.Application;
 import com.gorgexec.mvvmcore.dagger.ActivityCoreComponent;
 import com.gorgexec.mvvmcore.dagger.AppCoreComponent;
 
-public abstract class AppCore extends Application {
+public abstract class AppCore<TAppComponent extends AppCoreComponent> extends Application {
 
-    public abstract AppCoreComponent getCoreAppComponent();
-    public abstract ActivityCoreComponent getCoreActivityComponent();
+    private TAppComponent appComponent;
+
+    public void setAppComponent(TAppComponent appComponent) {
+        this.appComponent = appComponent;
+    }
+
+    public TAppComponent getAppComponent() {
+        return appComponent;
+    }
+
+    public ActivityCoreComponent getActivityComponent() {
+        return (ActivityCoreComponent) appComponent;
+    }
 }

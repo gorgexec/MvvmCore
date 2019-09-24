@@ -13,11 +13,11 @@ public class ActivityResultDispatcher {
         this.factory = factory;
     }
 
-    public void dispatch(int requestCode, int resultCode, @Nullable Intent data) {
+    public void dispatch(ActivityCore activity, int requestCode, int resultCode, @Nullable Intent data) {
 
         IActivityResultHandler handler = factory.create(requestCode);
         if (handler != null) {
-            new Thread(() -> handler.onActivityResult(requestCode, resultCode, data)).start();
+            handler.onActivityResult(activity, resultCode, data);
 
         }
     }
