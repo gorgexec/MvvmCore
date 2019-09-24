@@ -331,10 +331,13 @@ public class App extends AppCore<AppComponent> {
 4. If your Dagger2 configuration consists of several components (subcomponents), it is required to additionally override `getActivityComponent()` method of extended `Application` class, so that MvvmCore will know, how to get Activity scope related component:
 
 ```java
- @Override
- public ActivityCoreComponent getActivityComponent() {
-     return getAppComponent().activityComponentFactory().create();
- }
+@MvvmCoreApp
+public class App extends AppCore<AppComponent> {
+    @Override
+    public ActivityCoreComponent getActivityComponent() {
+        return getAppComponent().activityComponentFactory().create();
+    }
+}
 ```
 
 ## Addons
