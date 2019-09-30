@@ -129,7 +129,6 @@ public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewMo
 
 4. All MvvmCore methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback. `binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
 
-#ViewModel
 ### ViewModel
 When implementing ViewModel, `ViewModelCore` base class should be extended. MvvmCore uses Dagger2 to provide ViewModels instances, thus ViewModel constructor should be annotated with `@Inject`:
 
