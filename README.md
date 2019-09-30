@@ -3,7 +3,7 @@ This library provides minimal infrastructure for android application building ba
 [Android application architecture](https://developer.android.com/jetpack/docs/guide), but with some improvements and less boilerplate that usually takes place, when you start MVVM app from scratch. 
 MvvmCore will help to reduce some usual infrastructure routines dealing with:
 
-* [ViewModel](#View-Model) 
+* [ViewModel](#viewmodel) 
   * instantiation by dagger2
   * sharing between views
   * lifecycle management
