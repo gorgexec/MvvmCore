@@ -22,7 +22,7 @@ Extend `ActivityCore` or `BindableActivityCore` for databinding capabilities. No
 Then call MvvmCore `bind()` method right from the start of the `onCreate` callback. Note, in addition to layout resource id `R.layout.activity_main` and view model class `MainViewModel.class` the method below also accepts the id of `NavHost` implementation `R.id.navHostFragment` that provides navigation capabilities out of the box:
 
 ```java
-public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
+public class MainActivity extends BindableActivityCore<MainViewModel, ActivityMainBinding> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ With this code you'll get:
 Thus, in more complex case the code may be something like that:
 
 ```java
-public class MainActivity extends BindableActivityCore<ActivityMainBinding, MainViewModel> {
+public class MainActivity extends BindableActivityCore<MainViewModel, ActivityMainBinding> {
  @Override
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
@@ -113,7 +113,7 @@ The library provides the same abilities for Fragments as for Activities. But the
 
 ```java
 @ViewModelOwner
-public class MyFragment extends BindableFragmentCore<FragmentMyBinding, MyViewModel> {
+public class MyFragment extends BindableFragmentCore<MyViewModel, FragmentMyBinding> {
 
     public MyFragment() {
         super(R.layout.fragment_my, R.id.myFragment, MyViewModel.class);
