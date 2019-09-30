@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -62,6 +64,17 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
         setContentView(layoutId);
     }
 
+    protected void setContentView(@LayoutRes int layoutId, @IdRes int navHostId, Class<TModel> modelClass) {
+        this.navHostId = navHostId;
+        prepareModel(modelClass);
+        setContentView(layoutId);
+    }
+
+    protected void setContentView(@LayoutRes int layoutId, @IdRes int navHostId) {
+        this.navHostId = navHostId;
+        setContentView(layoutId);
+    }
+
     @Override
     protected void onResume() {
         if (model != null) {
@@ -104,6 +117,7 @@ public abstract class ActivityCore<TModel extends ViewModelCore> extends AppComp
         modelNotificationDispatcher.addHandler(notificationClass, handler);
     }
 
+    @Nullable
     public NavController nav() {
         return navHostId != 0 ? Navigation.findNavController(this, navHostId) : null;
     }

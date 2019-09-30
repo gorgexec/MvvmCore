@@ -94,7 +94,10 @@ public class CoreBindingsProcessor extends AbstractProcessor {
                 //fill view models list
                 TypeMirror typeMirror = typeElement.getSuperclass();
                 DeclaredType declaredType = (DeclaredType) typeMirror;
-                models.add(declaredType.getTypeArguments().get(0));
+                List<? extends TypeMirror> arguments = declaredType.getTypeArguments();
+                if (arguments != null && !arguments.isEmpty()) {
+                    models.add(arguments.get(0));
+                }
 
             }
             else {
