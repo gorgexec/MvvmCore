@@ -207,11 +207,12 @@ and corresponding layout (some usual xml code is omitted for brevity):
 </layout
 ```    
 #### ViewModel-to-View notifications
-MvvmCore provides additional way to broadcast notifications outside `ViewModel` and handle them either by `Activity/Fragment` or by special `NotificationHandler` (in case of global notifications).
+MvvmCore provides additional way to broadcast notifications outside of `ViewModel` and handle them either by `Activity/Fragment` or by special `NotificationHandler` (usually, in case of global notifications).
 
-For example, as `ViewModel` shouldn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations this is usually done by introducing `LiveData` object as ViewModel public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring and code - bloated. 
+For example, as `ViewModel` shouldn't have direct reference to `Context`, the one of the ways to finish `Activity` from `ViewModel` is to send corresponding notification to it. In terms of Android architecture components recomendations, this is usually done by introducing `LiveData` object as `ViewModel` public property, that is subscribed by `Activity` or `Fragment`. But when app grows, such implementation becomes boring and code - bloated. 
 
-So, it can be done easier with the help of MvvmCore ViewModel `notifyView()` method, that accepts parameter of any type as notification content:
+So, it can be done easier with the help of MvvmCore ViewModel's `notifyView()` method, that accepts parameter of any type as notification content:
+
 ```java
 public class MyViewModel extends ViewModelCore {
    ...
@@ -238,12 +239,12 @@ public class MyActivity extends ActivityCore<MyViewModel> {
     }
 }
 ```
-In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call, and in accordance with `Activity` lifecycle `MyViewModel` will be similarly disposed.
+In the example above, `MyActivity` will fininsh itself as soon as `MyViewModel` object performs `notifyView()` method call, and in accordance with `Activity` lifecycle, `MyViewModel` will be similarly disposed.
 
-Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. And during other states it is automatically unsubscribed by the library and resubscribed again when `onResume` occurs. So, you shouldn't care about it by yourself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization (for `Activity` it is `onCreate()` method, in case of `Fragment` - `onActivityCreated()` or `onBindingReady()`).
+Note, that `subscribeNotification()` method is also dependent upon `Activity` lifecycle. It's alive from `onResume` till `onPause` states of `Activity`. During other states it is automatically unsubscribed by the library and resubscribed again when `onResume` occurs. So, you shouldn't care about it by yourself. Just do `subscribeNotification()` at the moment of `View` creation, but after `ViewModel` initialization (for `Activity` it is `onCreate()` method, in case of `Fragment` - `onActivityCreated()` or `onBindingReady()`).
 
 #### ViewModel global notifications
-Sometimes, it's required to issue similar notifications by different ViewModels and handle them equally over all Views. Usually that is the case for common tasks like showing Dialog/Toast, open Document or quit app by `ViewModel` command. And that's a deal for custom `NotificationHandler`. All you have to do is to implement `INotificationHandler` interface as the following: 
+Sometimes, it's required to issue similar notifications by different ViewModels and handle them equally over all Views. Usually that is the case for common tasks like showing Dialog/Toast, open Document or quit app by `ViewModel` command. And that's a deal for custom `NotificationHandler`. All you have to do, is to implement `INotificationHandler` interface as the following: 
 
 ```java
 public class QuitAppHandler implements INotificationHandler<QuitApp> {
@@ -263,7 +264,7 @@ public class QuitAppHandler implements INotificationHandler<QuitApp> {
 
 Note:
 * `QuitApp` is a `ViewModel` notification that will may be called by any `ViewModel` with the help of `notifyView()` method.
-* As your handler implementation is resolved by Dagger2, it should either be decalared in corresponding Dagger2 module or have a constructor denoted with `@Inject` annotation like in the example above.
+* As your handler implementation is resolved by `Dagger2`, it should either be decalared in corresponding `Dagger2` module or have a constructor denoted with `@Inject` annotation like in the example above.
 
 That's it. The rest is done automatically by prebuild processing.
 
