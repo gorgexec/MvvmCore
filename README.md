@@ -168,7 +168,7 @@ public class MyViewModel extends ViewModelCore {
 
 #### Data binding properties
 
-As extended from `ViewModelCore`, ViewModel becomes to be a subtype of `androidx.lifecycle.ViewModel`. It supports all `androidx.lifecycle.ViewModel` features and also implements `androidx.databinding.Observable` out of the box, so it is ready to provide Data binding properties to its View like the following:
+Being extended from `ViewModelCore`, your `ViewModel` becomes to be a subtype of `androidx.lifecycle.ViewModel`. It supports all `androidx.lifecycle.ViewModel` features and also implements `androidx.databinding.Observable` out of the box, so it is ready to provide [Data bindable properties](https://developer.android.com/reference/android/databinding/Bindable) for its `View` like the following:
 
 ```java
 public class MyViewModel extends ViewModelCore {
