@@ -27,7 +27,10 @@ Note, that the first type-parameter of `BindableActivityCore` generic is `ViewMo
 
 2. _Call MvvmCore `bind()` method right from the start of the `onCreate` callback._ 
 
-Note, in addition to layout resource id `R.layout.activity_main` and view model class `MainViewModel.class` the method below also accepts the id of `NavHost` implementation `R.id.navHostFragment` that provides navigation capabilities out of the box:
+`bind()` method and its overloads setup the following:
+ * layout resource id 
+ * `NavHost` implementation id (optional)
+ * `ViewModel` class
 
 ```java
 public class MainActivity extends BindableActivityCore<MainViewModel, ActivityMainBinding> {
