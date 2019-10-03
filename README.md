@@ -27,7 +27,7 @@ Note, that the first type-parameter of `BindableActivityCore` generic is `ViewMo
 
 2. _Call MvvmCore `setContentView()` or bind()` method (in case of `BindableActivityCore`) right from the start of the `onCreate` callback._ 
 
-These methods and their overloads, commonly, setup the following:
+These methods and their overloads commonly setup the following:
  * layout resource id 
  * `NavHost` implementation id (optional)
  * `ViewModel` class
@@ -77,7 +77,7 @@ public class MainActivity extends BindableActivityCore<MainViewModel, ActivityMa
 ```
 
 #### Activity result handlers
-What if its necessary to process `onActivityResult` callback by a `ViewModel`? MvvmCore lets to achieve that with no code bloated the `Activity` itself by simply implementing `IActivityResultHandler`:
+What if its necessary to process `onActivityResult` callback by a `ViewModel`? MvvmCore allows that by simply implementing `IActivityResultHandler` with no code bloated the `Activity` itself :
 
 ```java
 @ActivityResultHandler(100)
