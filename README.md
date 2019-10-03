@@ -152,7 +152,11 @@ Methods like `model()`, `nav()` and `subscribeNotification()` become accessable 
 `binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
 
 ### ViewModel
-When implementing `ViewModel`, `ViewModelCore` base class should be extended. MvvmCore uses `Dagger2` to provide ViewModels instances, thus `ViewModel` constructor should be annotated with `@Inject`:
+MvvmCore `ViewModel` implements `ViewModel` from [Android architecture components](https://developer.android.com/topic/libraries/architecture/viewmodel).
+
+To enable MvvmCore powered ViewModel, `ViewModelCore` base class must be extended. 
+
+As MvvmCore uses `Dagger2` to provide ViewModels instances, annotate `ViewModel` constructor with `@Inject`:
 
 ```java
 public class MyViewModel extends ViewModelCore {
