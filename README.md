@@ -320,7 +320,7 @@ The config object is available through `appConfig()` method of MvvmCore `Activit
 
 2. Top-level Dagger2 component must be extended from `AppCoreComponent` and contain component `Factory` method accepting at least `Context` and `AppCoreConfig` as parameters.
 
-3. The top-level Dagger2 component (if only one) or subcomponent (if there are multiple components are used) that corresponds to `Activity` scope must be also extended from `ActivityCoreComponent` interface and include `CoreBindingsModule`. Note, that `CoreBindingsModule` is composed during compile time, thus at the first build it would not be found.  
+3. The top-level Dagger2 component (if only one) or `Activity` scope subcomponent (if there are multiple components are used) must be also extended from `ActivityCoreComponent` interface and include `CoreBindingsModule`. Note, that *`CoreBindingsModule` is composed during compile time, thus at the first build it would not be found.*  
 
 So, totally the component code may be like that:
 
