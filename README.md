@@ -287,6 +287,8 @@ dependencies {
 
 2. Include Dagger2 dependency to your project.
 
+3. If you intend to use `Navigation component`, [add it](https://developer.android.com/guide/navigation/navigation-getting-started) to the project.
+
 3. Check additional gradle options in your app's module `build.gradle` file:
 
 ```gradle
