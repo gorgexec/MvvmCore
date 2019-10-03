@@ -15,7 +15,7 @@ MvvmCore will help to reduce some usual infrastructure routines dealing with:
 ## Usage
 First of all, MvvmCore is about interaction between view model and view. Let's have a look at how the library simplifies Activity/Fragment-ViewModel usage.
 
-Generally, when implementing `Activity`, `Fragment` or `ViewModel` you should extend corresponding MvvmCore class. Classes with `Bindable *` prefix are used for databinding capabilities.
+Generally, you should extend corresponding MvvmCore class when implementing `Activity`, `Fragment` or `ViewModel`. Classes with `Bindable *` prefix are used for databinding capabilities.
 
 ### Activity
 
