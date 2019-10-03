@@ -289,7 +289,7 @@ dependencies {
 
 3. If you intend to use `Navigation component`, [add it](https://developer.android.com/guide/navigation/navigation-getting-started) to the project.
 
-3. Check additional gradle options in your app's module `build.gradle` file:
+4. Check additional gradle options in your app's module `build.gradle` file:
 
 ```gradle
  compileOptions {
