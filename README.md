@@ -145,14 +145,14 @@ public class MyFragment extends BindableFragmentCore<MyViewModel, FragmentMyBind
     }
 }
 ```
-3. _If your `ViewModel` lifecycle is controlled by a `Fragment`, it's always required to use `@ViewModelOwner` annotation. Otherwise, if `ViewModel` owner is an `Activity` that should share it's own `ViewModel` with the `Fragment` - skip the annotaion._
+If your `ViewModel` lifecycle is controlled by a `Fragment`, it's always required to use `@ViewModelOwner` annotation. Otherwise, if `ViewModel` owner is an `Activity` that should share it's own `ViewModel` with the `Fragment` - skip the annotaion.
 
-4. _Methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback._
+Methods like `model()`, `nav()` and `subscribeNotification()` become accessable with `onActivityCreated` Fragment lifecycle callback.
 
-5. _`binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`._
+`binding()` method can be used starting from `onBindingReady` lifecycle callback, that is invoked between`onActivityCreated` and `onStart` lifecycle callbacks in Fragments extended from `BindableFragmentCore`.
 
 ### ViewModel
-When implementing ViewModel, `ViewModelCore` base class should be extended. MvvmCore uses Dagger2 to provide ViewModels instances, thus ViewModel constructor should be annotated with `@Inject`:
+When implementing `ViewModel`, `ViewModelCore` base class should be extended. MvvmCore uses `Dagger2` to provide ViewModels instances, thus `ViewModel` constructor should be annotated with `@Inject`:
 
 ```java
 public class MyViewModel extends ViewModelCore {
@@ -162,7 +162,7 @@ public class MyViewModel extends ViewModelCore {
     }
 }
 ```
-It may be empty constructor or constructor declaring any number of necessary dependencies, except Context or any View-specific objects references, because of architecture principles violation. 
+`ViewModel` constructor may have no arguments or declaring any number of necessary dependencies, except `Context` or any `View-specific objects references`, because of architecture principles violation. 
 
 #### Data binding properties
 
