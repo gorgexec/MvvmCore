@@ -312,7 +312,7 @@ Your app should contain implementation of `AppCoreConfig` interface, that is, fi
 
 Note, that not all of the requested BR resources might be used in project, so, in case some are not engaged, zero may be used as return, but at least `getDefaultModelBR()` must return actual value.
 
-The config class is available through `appConfig()` method of MvvmCore `Activity`.
+The config object is available through `appConfig()` method of MvvmCore `Activity`.
 
 #### Dagger2
 
