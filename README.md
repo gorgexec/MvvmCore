@@ -340,9 +340,9 @@ public interface AppComponent extends AppCoreComponent, ActivityCoreComponent {
 
 2. `Application` class must be annotated with `@MvvmCoreApp`.
 
-2. Your `Application` class must be registered in `AndroidManifest.xml` under the `android:name` field of `<application/>` tag.
+3. Your `Application` class must be registered in `AndroidManifest.xml` under the `android:name` field of `<application/>` tag.
 
-3. Overrided `onCreate` calback of the extended `Application` class must invoke `setAppComponent()` method, that accepts initialized Dagger2 root component.
+4. Overrided `onCreate` calback of the extended `Application` class must invoke `setAppComponent()` method, that accepts initialized Dagger2 root component.
 
 Generally, the code will be like the following:
 
@@ -357,7 +357,7 @@ public class App extends AppCore<AppComponent> {
 }
 ```
 
-4. If your Dagger2 configuration consists of several components (subcomponents), it is required to additionally override `getActivityComponent()` method of extended `Application` class, so that MvvmCore will know, how to get Activity scope related component:
+5. If your Dagger2 configuration consists of several components (subcomponents), it is required to additionally override `getActivityComponent()` method of extended `Application` class, so that MvvmCore will know, how to get Activity scope related component:
 
 ```java
 @MvvmCoreApp
