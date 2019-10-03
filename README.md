@@ -162,7 +162,7 @@ public class MyViewModel extends ViewModelCore {
     }
 }
 ```
-`ViewModel` constructor may have no arguments or declaring any number of necessary dependencies, except `Context` or any `View-specific objects references`, because of architecture principles violation. 
+`ViewModel` constructor may have no arguments or declare any number of necessary dependencies, except `Context` or any `View-specific objects references`, because of architecture principles violation. 
 
 #### Data binding properties
 
