@@ -46,7 +46,7 @@ That's it.
 
 With the code above you'll get:
 
-* `ViewModel` instance created with necessary dependencies, injected to the activity and accessible through `model()` method of the corresponding `Activity`.
+* `ViewModel` instance created with necessary dependencies, injected to the `Activity` and accessible through `model()` method of the corresponding `Activity`.
 * Layout elements accessible through `binding()` `Activity` method.
 * Initialized `NavController` accessible through `nav()` method of `Activity`.
 * Option to subscribe and respond to any `ViewModel-issued event` with the help of `subscribeNotification()` method.
@@ -68,7 +68,8 @@ public class MainActivity extends BindableActivityCore<MainViewModel, ActivityMa
      model().setId(someId);
      
      //subscribing to some events issued by view model
-     subscribeNotification(MainViewModel.MainViewModel.class, notification -> nav().navigate(R.id.somethingFragment));
+     subscribeNotification(MainViewModel.MainViewModel.class, 
+                            notification -> nav().navigate(R.id.somethingFragment));
      subscribeNotification(Finish.class, notification -> finish());
      .....
     }
